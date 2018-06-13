@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 metrics = [
     'qc_dir',
-'unique_on_target_aligned_bp',
+    'unique_on_target_aligned_bp',
     'duplicate_on_target_aligned_bp',
     'unique_off_target_aligned_bp',
     'duplicate_off_target_aligned_bp',
@@ -22,6 +22,8 @@ metrics = [
     'duplicate_off_target_aligned_bp_percent',
     'total_unaligned_bp_percent',
     '20X',
+    '30X',
+    '40X',
     'mean_depth'
 ]
 
@@ -80,10 +82,15 @@ with open(args.infile) as csvfile, open(exomeoutfile, 'w') as outfile:
                                 metrics_out['mean_depth'] = metric2['mean_depth']
                             if metric2['minimum_depth'] == '20':
                                 metrics_out['20X'] = metric2['pc_target_space_covered']
+                            if metric2['minimum_depth'] == '30':
+                                metrics_out['30X'] = metric2['pc_target_space_covered']
+                            if metric2['minimum_depth'] == '40':
+                                metrics_out['40X'] = metric2['pc_target_space_covered']
                     met2csv.close()
             w.writerow(metrics_out)
 
         else:
             print(path, 'directory not found')
 exit()
+
 
